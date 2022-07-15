@@ -9,7 +9,7 @@
 <div id="registration-form">
     <div class='fieldset'>
         <legend>Registration</legend>
-        <form onsubmit="handleFormSubmit(event)" data-validate="parsley">
+        <form onsubmit="handleRegistration(event)" data-validate="parsley">
             <div class='row'>
                 <label for='firstname'>First Name</label>
                 <input type="text" placeholder="First Name" name='firstName' id='firstname' data-required="true"
@@ -38,6 +38,6 @@
     </div>
 </div>
 
-<script src="js/registration.js"></script>
+<script src="js/form-handler.js"></script>
 </body>
 </html>

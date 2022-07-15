@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
                     return user;
                 }
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
