@@ -3,10 +3,12 @@ package dao.impl;
 import dao.ProductDao;
 import entities.Product;
 import jdbc.MySqlConnector;
+import mappers.ProductMapper;
+import mappers.UserMapper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
+import java.util.Optional;
 
 public class ProductDaoImpl implements ProductDao {
 
@@ -24,5 +26,22 @@ public class ProductDaoImpl implements ProductDao {
         statement.setString(2,product.getDescription());
         statement.setDouble(3,product.getPrice());
         statement.execute();
+    }
+
+    @Override
+    public List<Product> getAll() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM product");
+        return ProductMapper.mapToListOfProducts(resultSet);
+    }
+
+    @Override
+    public Optional<Product> getById(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE id = ?");
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        List<Product> products = ProductMapper.mapToListOfProducts(resultSet);
+
+        return Optional.ofNullable(products.get(0));
     }
 }

@@ -1,5 +1,6 @@
 const REGISTRATION_ENDPOINT = 'register';
 const LOGIN_ENDPOINT = 'login';
+const PRODUCT_ENDPOINT = 'product';
 
 function handleRegistration(event) {
     handleFormSubmit(event, REGISTRATION_ENDPOINT, (result) => {
@@ -25,6 +26,19 @@ function handleLogin(event) {
                     break;
                 case '403':
                     document.querySelector('#errorMessage').innerText = `Incorrect credentials`;
+                    break;
+                default:
+                    document.querySelector('#errorMessage').innerText = `Opps something went wrong. Please try again`;
+            }
+        }, handleError);
+}
+function handleCreateProduct(event) {
+    handleFormSubmit(event, PRODUCT_ENDPOINT,
+        (result) => {
+            switch (result.status) {
+                case 200 :
+                    alert("Success!");
+                    window.location.reload();
                     break;
                 default:
                     document.querySelector('#errorMessage').innerText = `Opps something went wrong. Please try again`;
