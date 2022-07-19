@@ -6,6 +6,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
+
 <main>
     <div class="album py-5 bg-light">
         <div class="container-fluid" >
@@ -17,5 +18,6 @@
 </main>
 
 <script src="js/product.js"></script>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

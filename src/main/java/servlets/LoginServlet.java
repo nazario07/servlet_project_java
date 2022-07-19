@@ -1,6 +1,7 @@
 package servlets;
 
 
+import dao.impl.BucketDaoImpl;
 import dao.impl.UserDaoImpl;
 import entities.User;
 import exceptions.IncorrectCredsExceptions;
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     private final UserService userService;
 
     public LoginServlet() {
-        this.userService = new UserServiceImpl(new UserDaoImpl());
+        this.userService = new UserServiceImpl(new UserDaoImpl(), new BucketDaoImpl());
     }
 
     @Override

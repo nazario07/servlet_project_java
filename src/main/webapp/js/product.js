@@ -1,4 +1,5 @@
 const PRODUCT_ENDPOINT = 'product';
+const BUCKET_ENDPOINT = 'bucket';
 
 const createCard = (product) =>
     `
@@ -10,8 +11,10 @@ const createCard = (product) =>
                             <p class="card-text">${product.description}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                    <a href="product?id=${product.id}">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    </a>
+                                    <button id="${product.id}" type="button" class="btn btn-sm btn-outline-success">
                                         <i class="fa-solid fa-basket-shopping"></i>
                                     </button>
                                 </div>
@@ -20,6 +23,20 @@ const createCard = (product) =>
                         </div>
                     </div>
                 </div>`;
+
+function addProductToBucket(productId) {
+    console.log('!!!!!');
+    fetch(BUCKET_ENDPOINT, {
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({productId})
+    }).then((result) => {
+        console.log(result);
+        alert('Added to bucket');
+    })
+}
 
 function getProducts() {
     const sendRequest = async () => {
@@ -32,9 +49,18 @@ function getProducts() {
         console.log(products);
 
         const element = document.querySelector('#content');
-        products.forEach((item)=>{
-            element.innerHTML = element.innerHTML+ createCard(item);
-        })
+        products.forEach((item) => {
+            element.innerHTML = element.innerHTML + createCard(item);
+
+        });
+        products.forEach((item) => {
+            document.querySelector(`#${item.id}`).addEventListener('click',()=>{
+                addProductToBucket(item.id)
+            })
+        });
+
+
+
 
     }
     sendRequest();

@@ -33,7 +33,9 @@ public class ProductController extends HttpServlet {
 
         if (id != null) {
             Product product = productService.getById(Integer.parseInt(id));
-            writer.print(gson.toJson(product));
+//            writer.print(gson.toJson(product));
+            req.setAttribute("product",product);
+            req.getRequestDispatcher("details.jsp").forward(req, resp);
         } else {
             List<Product> all = productService.getAll();
             writer.print(gson.toJson(all));

@@ -6,6 +6,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div style="width: 70%; margin: 30px auto">
+
     <form onsubmit="handleCreateProduct(event)">
         <div class="mb_3">
             <label for="name" class="form-label">Product Name</label>

@@ -1,5 +1,6 @@
 package services.impl;
 
+import dao.BucketDao;
 import dao.UserDao;
 import entities.User;
 import exceptions.IncorrectCredsExceptions;
@@ -13,9 +14,11 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final BucketDao bucketDao;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, BucketDao bucketDao) {
         this.userDao = userDao;
+        this.bucketDao = bucketDao;
     }
 
     @Override
@@ -29,18 +32,18 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-    @Override
-    public void insert(User user) throws UserAlreadyExistException {
-        try {
-            Optional<User> byEmail = userDao.getByEmail(user.getEmail());
-            if (byEmail.isPresent()) {
-                throw new UserAlreadyExistException(user.getEmail());
-            }
-            userDao.insert(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+//    public void insert(User user) throws UserAlreadyExistException {
+//        try {
+//            Optional<User> byEmail = userDao.getByEmail(user.getEmail());
+//            if (byEmail.isPresent()) {
+//                throw new UserAlreadyExistException(user.getEmail());
+//            }
+//            userDao.insert(user);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     @Override
     public void displayById(int id) throws UserNotFoundException {
@@ -71,4 +74,22 @@ public class UserServiceImpl implements UserService {
         }
         throw new IncorrectCredsExceptions();
     }
+    @Override
+    public void registration(User user) throws SQLException, UserAlreadyExistException {
+        Optional<User> byEmail = userDao.getByEmail(user.getEmail());
+        if (byEmail.isPresent()) {
+            throw new UserAlreadyExistException(user.getEmail());
+        }
+
+        userDao.insert(user);
+        Optional<User> first = userDao.getByEmail(user.getEmail());
+        first.ifPresent(u-> {
+            try {
+                bucketDao.create(u.getId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
+

@@ -32,8 +32,6 @@ public class UserDaoImpl implements UserDao {
         statement.setString(4, object.getPassword());
         statement.setString(5, object.getRole().name());
         statement.execute();
-
-
     }
 
     @Override
@@ -50,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getByEmail(String email) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT first_name,last_name,email,password FROM user WHERE email=?");
+        PreparedStatement statement = connection.prepareStatement("SELECT id, first_name,last_name,email,password FROM user WHERE email=?");
         statement.setString(1, email);
         ResultSet resultSet = statement.executeQuery();
         return Optional.ofNullable(UserMapper.mapToUser(resultSet));

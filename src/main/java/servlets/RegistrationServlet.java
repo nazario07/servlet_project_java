@@ -1,6 +1,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import dao.impl.BucketDaoImpl;
 import dao.impl.UserDaoImpl;
 import entities.User;
 import exceptions.UserAlreadyExistException;
@@ -14,13 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService;
 
     public RegistrationServlet() {
-        this.userService = new UserServiceImpl(new UserDaoImpl());
+        this.userService = new UserServiceImpl(new UserDaoImpl(), new BucketDaoImpl());
     }
 
 
@@ -32,9 +34,9 @@ public class RegistrationServlet extends HttpServlet {
         User user = gson.fromJson(reader, User.class);
         System.out.println(user);
         try {
-            userService.insert(user);
+            userService.registration(user);
             resp.sendRedirect("login.jsp");
-        } catch (UserAlreadyExistException e) {
+        } catch (UserAlreadyExistException | SQLException e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_CONFLICT);
         }

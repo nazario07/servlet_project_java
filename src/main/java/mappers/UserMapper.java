@@ -22,10 +22,12 @@ public class UserMapper {
         User user = null;
         while(resultSet.next()){
             user = new User();
-            user.setFirstName(resultSet.getString(1));
-            user.setLastName(resultSet.getString(2));
-            user.setEmail(resultSet.getString(3));
-            user.setPassword(resultSet.getString(4));
+            user.setId(resultSet.getInt(1));
+            user.setFirstName(resultSet.getString(2));
+            user.setLastName(resultSet.getString(3));
+            user.setEmail(resultSet.getString(4));
+            user.setPassword(resultSet.getString(5));
+
         }
         return user;
     }

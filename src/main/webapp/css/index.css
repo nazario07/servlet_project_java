@@ -1,3 +1,22 @@
-.test{
-    color: red;
+.list-item{
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 16px;
+    display: flex;
+}
+
+.btns{
+    align-self: center;
+    margin-left: auto;
+}
+
+.content{
+    overflow: hidden;
+    margin: 0 20px;
+}
+
+.image{
+    width: 150px;
+    height: 150px;
+    background: red;
 }
