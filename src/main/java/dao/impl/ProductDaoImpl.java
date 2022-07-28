@@ -21,10 +21,11 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void insert(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO product (name, description, price) VALUES (?,?,?)");
+                "INSERT INTO product (name, description, price, image) VALUES (?,?,?,?)");
         statement.setString(1,product.getName());
         statement.setString(2,product.getDescription());
         statement.setDouble(3,product.getPrice());
+        statement.setString(4, product.getImage());
         statement.execute();
     }
 
@@ -41,7 +42,6 @@ public class ProductDaoImpl implements ProductDao {
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         List<Product> products = ProductMapper.mapToListOfProducts(resultSet);
-
         return Optional.ofNullable(products.get(0));
     }
 }

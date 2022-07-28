@@ -20,7 +20,7 @@ public class AuthFilterHelper {
         if (sessionParams.firstName != null && sessionParams.id != null) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("login.jsp");
         }
     }
     public static void handleNotAuthUser(ServletRequest servletRequest, ServletResponse servletResponse,

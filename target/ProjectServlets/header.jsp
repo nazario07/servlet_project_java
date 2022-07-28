@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Object firstName = session.getAttribute("firstName");
+%>
 <html>
 <head>
     <title>Header</title>
@@ -22,34 +25,45 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="index.jsp" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="createProduct.jsp" class="nav-link px-2 text-white">Create Product</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+
+                <%
+                    Object role = session.getAttribute("role");
+                    if (role != null) {
+                        if (session.getAttribute("role").toString().equals("ADMIN")) {
+                            out.print("<li><a href=\"createProduct.jsp\" class=\"nav-link px-2 text-white\">Create Product</a></li>");
+                        }
+                    }
+                %>
+                <li><a href="bucket.jsp" class="nav-link px-2 text-white">Bucket</a></li>
+                <li><a href="cabinet.jsp" class="nav-link px-2 text-white">Cabinet</a></li>
             </ul>
 
 
             <div class="text-end">
-                <%
-                    Object firstName = session.getAttribute("firstName");
-                    if (firstName != null) {
-                        out.print("<a href=\"logout\">\n" +
-                                "                    <button type=\"button\" class=\"btn btn-warning\">Logout</button>" +
-                                "</a>");
+                <span hidden id="login">
+                    <a href="login.jsp">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    </a>
 
-                    } else {
-                        out.print("<a href=\"login.jsp\">\n" +
-                                "                    <button type=\"button\" class=\"btn btn-outline-light me-2\">Login</button></a>\n" +
-                                "                <a href=\"registration.jsp\">\n" +
-                                "                    <button type=\"button\" class=\"btn btn-warning\">Sign-up</button></a>");
-                    }
+                    <a href="registration.jsp">
+                        <button type="button" class="btn btn-warning">Sign-up</button>
+                    </a>
+                </span>
 
-                %>
+                <a href="logout" hidden id="logout">
+                    <button type="button" onclick="localStorage.clear()" class="btn btn-warning">Logout</button>
+                </a>
 
             </div>
         </div>
     </div>
 </header>
+
+<script>
+    const isLogin = <%= firstName != null%>;
+    const id = isLogin ? 'logout' : 'login'
+    document.getElementById(id).removeAttribute('hidden');
+</script>
 
 </body>
 </html>

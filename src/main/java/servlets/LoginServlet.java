@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("id", user.getId());
             session.setAttribute("firstName", user.getFirstName());
+            session.setAttribute("role", user.getRole());
             resp.sendRedirect("cabinet.jsp");
         } catch (IncorrectCredsExceptions e) {
             e.printStackTrace();

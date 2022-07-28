@@ -17,6 +17,14 @@
 
 </main>
 
+<script>
+    let item = localStorage.getItem("userId");
+    const idFromSession = <%= session.getAttribute("id")%>
+    if(idFromSession !== item){
+        localStorage.setItem("userId", idFromSession);
+    }
+</script>
+
 <script src="js/product.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>

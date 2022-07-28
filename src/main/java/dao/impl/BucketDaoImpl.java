@@ -25,9 +25,10 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public void insertProduct(int bucketId, int productId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO bucket_product VALUES (?,?)");
+        PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO bucket_product VALUES (?,?)");
         statement.setInt(1, bucketId);
-        statement.setInt(2,productId);
+        statement.setInt(2, productId);
         statement.execute();
 
     }
@@ -35,15 +36,17 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public List<Product> getAllProducts(int bucketId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "SELECT p.id, p.name,p.description,p.price FROM bucket_product bp INNER JOIN product p on bp.product_id = p.id WHERE bucket_id =?");
-        statement.setInt(1,bucketId);
+                "SELECT p.id, p.name,p.description,p.price, p.image FROM bucket_product bp INNER JOIN product p on bp.product_id = p.id WHERE bucket_id =?");
+        statement.setInt(1, bucketId);
         ResultSet resultSet = statement.executeQuery();
         return ProductMapper.mapToListOfProducts(resultSet);
     }
-@Override
+
+    @Override
     public void removeProductFromBucket(int bucketId, int productId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM bucket_product WHERE bucket_id=? AND product_id=?");
-        statement.setInt(1,bucketId);
-        statement.setInt(2,productId);
+        statement.setInt(1, bucketId);
+        statement.setInt(2, productId);
+        statement.execute();
     }
 }

@@ -1,7 +1,6 @@
 package mappers;
 
 import entities.Product;
-import entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +15,8 @@ public class ProductMapper {
                     resultSet.getInt(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
-                    resultSet.getDouble(4)
+                    resultSet.getDouble(4),
+                    resultSet.getString(5)
             );
             products.add(product);
         }

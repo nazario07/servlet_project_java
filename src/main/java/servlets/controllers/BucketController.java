@@ -7,7 +7,6 @@ import models.BucketProduct;
 import services.BucketService;
 import services.impl.BucketServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/bucket")
@@ -27,7 +27,7 @@ public class BucketController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         List<Product> products = bucketService.getProductFromBucket((int) session.getAttribute("id"));
         Gson gson = new Gson();
@@ -37,11 +37,24 @@ public class BucketController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         BufferedReader reader = req.getReader();
         Gson gson = new Gson();
         BucketProduct bucketItem = gson.fromJson(reader, BucketProduct.class);
         bucketItem.bucketId = (int) req.getSession().getAttribute("id");
         bucketService.addProductToBucket(bucketItem.bucketId, bucketItem.productId);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            int bucketId = (int) req.getSession().getAttribute("id");
+            int productId = Integer.parseInt(req.getParameter("productId"));
+            bucketService.removeItem(bucketId, productId);
+        } catch (SQLException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            e.printStackTrace();
+        }
+    }
 }
+

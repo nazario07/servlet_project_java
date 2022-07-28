@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
-@WebFilter(value = {"/cabinet.jsp", "/createProduct.jsp"})
+@WebFilter(value = {"/cabinet.jsp", "/createProduct.jsp", "/bucket.jsp"})
 public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,

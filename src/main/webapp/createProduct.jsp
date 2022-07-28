@@ -20,6 +20,12 @@
             <label for="price" class="form-label">Price in $</label>
             <input type="number" id="price" class="form-control" min="1" name="price">
         </div>
+
+        <div class="mb_3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" id="image" class="form-control" min="1" name="image">
+        </div>
+
         <input type="submit" class="btn_btn-primary">
     </form>
 </div>

@@ -36,19 +36,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getById(int id) throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM user WHERE id ='" + id + "'");
-        List<User> users = UserMapper.mapToListOfUsers(resultSet);
-        User user = null;
-        if (users.size() != 0) {
-            user = users.get(0);
-        }
-        return Optional.ofNullable(user);
+
+        return Optional.empty();
     }
 
     @Override
     public Optional<User> getByEmail(String email) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT id, first_name,last_name,email,password FROM user WHERE email=?");
+        PreparedStatement statement = connection.prepareStatement("SELECT id, first_name,last_name,email,password, role FROM user WHERE email=?");
         statement.setString(1, email);
         ResultSet resultSet = statement.executeQuery();
         return Optional.ofNullable(UserMapper.mapToUser(resultSet));

@@ -15,9 +15,10 @@
 <jsp:include page="header.jsp"></jsp:include>
 <%
     Product product = (Product) request.getAttribute("product");
+    String defaultImage="http://localhost:8080/ProjectServlets_war_exploded/images/product_img.png";
 %>
 <div class="container d-flex justify-content-center">
-    <figure class="card card-product-grid card-lg"> <a href="#" class="img-wrap" data-abc="true"> <img src="images/product_img.png" alt="product"></a>
+    <figure class="card card-product-grid card-lg"> <a href="#" class="img-wrap" data-abc="true"> <img src="<%= product.getImage() != null ? product.getImage() : defaultImage%>" alt="product"></a>
         <div class="info-wrap">
             <div class="row">
                 <div class="col-md-9 col-xs-9"> <a href="#" class="title" data-abc="true"><%= product.getName()%></a> <span class="rated">Foods</span> </div>
@@ -36,9 +37,9 @@
                 </div>
             </div>
         </div>
-        <div class="bottom-wrap"> <a href="bucket.jsp" class="btn btn-primary float-right" data-abc="true"> Buy now </a>
-            <div class="price-wrap"> <a href="index.jsp" class="btn btn-warning float-left" data-abc="true"> Cancel </a> </div>
-        </div>
+        <button class="bottom-wrap"> <a href="bucket.jsp" class="btn btn-primary float-right" data-abc="true"> Buy now </a>
+            <button class="price-wrap"> <a href="index.jsp" class="btn btn-warning float-left" data-abc="true"> Cancel </a> </button>
+        </button>
     </figure>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

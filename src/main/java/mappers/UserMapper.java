@@ -1,5 +1,6 @@
 package mappers;
 
+import entities.Role;
 import entities.User;
 
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class UserMapper {
             user.setLastName(resultSet.getString(3));
             user.setEmail(resultSet.getString(4));
             user.setPassword(resultSet.getString(5));
+            user.setRole(Role.valueOf(resultSet.getString(6)));
 
         }
         return user;

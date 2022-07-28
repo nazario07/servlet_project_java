@@ -35,4 +35,9 @@ public class BucketServiceImpl implements BucketService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void removeItem(int bucketId, int productId) throws SQLException {
+        bucketDao.removeProductFromBucket(bucketId, productId);
+    }
 }

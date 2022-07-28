@@ -63,6 +63,10 @@ function handleFormSubmit(event, endpoint, onSuccess, onError) {
     }
 
     const sendData = async (data) => {
+        if(data.image){
+            data.image = await toBase64(data.image);
+        }
+
         const result = await fetch(endpoint, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -84,3 +88,9 @@ const handleError = (object) => {
         }
     });
 }
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});

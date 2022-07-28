@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             products=  productDao.getAll();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return products;
     }
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
                 return byId.get();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return  null;
     }
