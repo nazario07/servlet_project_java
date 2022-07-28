@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Store</title>
+    <title>AppleStore</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>

@@ -1,3 +1,4 @@
+<%@ page import="entities.Product" %>
 <%
 %>
 

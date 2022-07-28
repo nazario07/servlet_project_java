@@ -29,6 +29,7 @@ const createListItem = (item) =>
     `
 
 
+
 function removeItem(id) {
     fetch(`${BUCKET_ENDPOINT}?productId=${id}`, {
         method: 'DELETE',

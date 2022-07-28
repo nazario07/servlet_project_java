@@ -7,7 +7,7 @@ const defaultImg = 'http://localhost:8080/ProjectServlets_war_exploded/images/pr
 const createCard = (product) =>
     `
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm" >
                         <img src="${product.image ? product.image : defaultImg}" alt="product">
                          <div class="card-body">
                             <h3>${product.name}</h3>
