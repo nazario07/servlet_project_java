@@ -2,6 +2,8 @@ package services.impl;
 
 import dao.ProductDao;
 import entities.Product;
+import jdbc.MySqlConnector;
+import org.apache.log4j.Logger;
 import services.ProductService;
 
 import java.sql.SQLException;
@@ -16,12 +18,15 @@ public class ProductServiceImpl implements ProductService {
         this.productDao = productDao;
     }
 
+    private static final Logger log = Logger.getLogger(String.valueOf(ProductServiceImpl.class));
+
     @Override
     public void createNewProduct(Product product) {
         try {
             productDao.insert(product);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
     }
 
@@ -32,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
             products=  productDao.getAll();
         } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
         return products;
     }
@@ -45,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
         return  null;
     }

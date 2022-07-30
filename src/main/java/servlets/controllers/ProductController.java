@@ -3,8 +3,10 @@ package servlets.controllers;
 import com.google.gson.Gson;
 import dao.impl.ProductDaoImpl;
 import entities.Product;
+import org.apache.log4j.Logger;
 import services.ProductService;
 import services.impl.ProductServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

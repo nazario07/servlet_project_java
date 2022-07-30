@@ -5,8 +5,10 @@ import dao.impl.BucketDaoImpl;
 import dao.impl.UserDaoImpl;
 import entities.User;
 import exceptions.IncorrectCredsExceptions;
+import org.apache.log4j.Logger;
 import services.UserService;
 import services.impl.UserServiceImpl;
+import servlets.controllers.ProductController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,8 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         this.userService = new UserServiceImpl(new UserDaoImpl(), new BucketDaoImpl());
     }
+
+    private static final Logger log = Logger.getLogger(String.valueOf(LoginServlet.class));
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +45,7 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("cabinet.jsp");
         } catch (IncorrectCredsExceptions e) {
             e.printStackTrace();
+            log.error(e.getMessage());
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
     }

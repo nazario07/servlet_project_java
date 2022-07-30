@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import dao.impl.BucketDaoImpl;
 import entities.Product;
 import models.BucketProduct;
+import org.apache.log4j.Logger;
 import services.BucketService;
 import services.impl.BucketServiceImpl;
+import services.impl.UserServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +27,9 @@ public class BucketController extends HttpServlet {
     public BucketController() {
         this.bucketService = new BucketServiceImpl(new BucketDaoImpl());
     }
+
+    private static final Logger log = Logger.getLogger(String.valueOf(BucketController.class));
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -53,6 +58,7 @@ public class BucketController extends HttpServlet {
             bucketService.removeItem(bucketId, productId);
         } catch (SQLException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            log.error(e.getMessage());
             e.printStackTrace();
         }
     }

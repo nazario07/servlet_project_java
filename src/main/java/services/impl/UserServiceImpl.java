@@ -6,6 +6,7 @@ import entities.User;
 import exceptions.IncorrectCredsExceptions;
 import exceptions.UserAlreadyExistException;
 import exceptions.UserNotFoundException;
+import org.apache.log4j.Logger;
 import services.UserService;
 
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.bucketDao = bucketDao;
     }
+    private static final Logger log = Logger.getLogger(String.valueOf(UserServiceImpl.class));
 
     @Override
     public List<User> getAll() {
@@ -32,19 +34,6 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-
-//    public void insert(User user) throws UserAlreadyExistException {
-//        try {
-//            Optional<User> byEmail = userDao.getByEmail(user.getEmail());
-//            if (byEmail.isPresent()) {
-//                throw new UserAlreadyExistException(user.getEmail());
-//            }
-//            userDao.insert(user);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
     @Override
     public void displayById(int id) throws UserNotFoundException {
         try {
@@ -52,9 +41,11 @@ public class UserServiceImpl implements UserService {
             if (optional.isPresent()) {
                 System.out.println(optional.get());
             } else {
+                log.error("User with id " + id + " not found");
                 throw new UserNotFoundException("User with id " + id + " not found");
             }
         } catch (SQLException e) {
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -70,6 +61,7 @@ public class UserServiceImpl implements UserService {
             }
 
         } catch (SQLException e) {
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
         throw new IncorrectCredsExceptions();
@@ -88,6 +80,7 @@ public class UserServiceImpl implements UserService {
                 bucketDao.create(u.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
             }
         });
     }

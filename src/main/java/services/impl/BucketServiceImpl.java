@@ -2,6 +2,8 @@ package services.impl;
 
 import dao.BucketDao;
 import entities.Product;
+import jdbc.MySqlConnector;
+import org.apache.log4j.Logger;
 import services.BucketService;
 
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ public class BucketServiceImpl implements BucketService {
     public BucketServiceImpl(BucketDao bucketDao) {
         this.bucketDao = bucketDao;
     }
+    private static final Logger log = Logger.getLogger(String.valueOf(MySqlConnector.class));
 
     @Override
     public List<Product> getProductFromBucket(int bucketId) {
@@ -23,6 +26,7 @@ public class BucketServiceImpl implements BucketService {
             allProducts = bucketDao.getAllProducts(bucketId);
         } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
         return allProducts;
     }
@@ -33,6 +37,7 @@ public class BucketServiceImpl implements BucketService {
             bucketDao.insertProduct(bucketId, productId);
         } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 

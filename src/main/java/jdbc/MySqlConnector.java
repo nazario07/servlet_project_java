@@ -1,10 +1,14 @@
 package jdbc;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class MySqlConnector implements Connector{
+    private static final Logger log = Logger.getLogger(String.valueOf(MySqlConnector.class));
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/web_project";
 
@@ -16,7 +20,8 @@ public class MySqlConnector implements Connector{
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            log.error(e.getMessage());
+
         }
         Connection connection;
         try {
