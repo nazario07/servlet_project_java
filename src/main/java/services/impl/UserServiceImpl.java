@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
         }
         throw new IncorrectCredsExceptions();
     }
+
+    @Override
+    public void removeUser(int userId) throws SQLException {
+        userDao.removeUser(userId);
+    }
+
     @Override
     public void registration(User user) throws SQLException, UserAlreadyExistException {
         Optional<User> byEmail = userDao.getByEmail(user.getEmail());

@@ -15,4 +15,6 @@ public interface UserDao {
 
     Optional<User> getByEmail(String email) throws SQLException;
 
+    void removeUser(int userId) throws SQLException;
+
 }

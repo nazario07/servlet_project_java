@@ -14,4 +14,6 @@ public interface UserService {
     void displayById(int id) throws UserNotFoundException;
     User login(String email, String password) throws IncorrectCredsExceptions;
 
+    void removeUser(int userId) throws SQLException;
+
 }

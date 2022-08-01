@@ -48,6 +48,7 @@ public class BucketController extends HttpServlet {
         BucketProduct bucketItem = gson.fromJson(reader, BucketProduct.class);
         bucketItem.bucketId = (int) req.getSession().getAttribute("id");
         bucketService.addProductToBucket(bucketItem.bucketId, bucketItem.productId);
+        log.info("user with id " + bucketItem.bucketId + " add product with id " + bucketItem.productId);
     }
 
     @Override

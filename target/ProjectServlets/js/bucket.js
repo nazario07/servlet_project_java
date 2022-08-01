@@ -38,6 +38,7 @@ function removeItem(id) {
     });
 }
 
+
 function getItems() {
     const bucketContainer = document.getElementById("bucket");
     fetch(BUCKET_ENDPOINT, {
@@ -57,3 +58,4 @@ function getItems() {
 }
 
 getItems();
+

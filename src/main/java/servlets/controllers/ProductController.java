@@ -20,6 +20,8 @@ import java.util.List;
 
 @WebServlet("/product")
 public class ProductController extends HttpServlet {
+
+    private static final Logger log = Logger.getLogger(String.valueOf(ProductController.class));
     private ProductService productService;
 
     public ProductController() {
@@ -35,7 +37,6 @@ public class ProductController extends HttpServlet {
 
         if (id != null) {
             Product product = productService.getById(Integer.parseInt(id));
-//            writer.print(gson.toJson(product));
             req.setAttribute("product",product);
             req.getRequestDispatcher("details.jsp").forward(req, resp);
         } else {
@@ -52,5 +53,6 @@ public class ProductController extends HttpServlet {
         BufferedReader reader = req.getReader();
         Product product = gson.fromJson(reader, Product.class);
         productService.createNewProduct(product);
+        log.info("Created a new product "+ product.toString());
     }
 }

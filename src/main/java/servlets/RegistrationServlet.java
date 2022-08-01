@@ -37,6 +37,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             userService.registration(user);
             resp.sendRedirect("login.jsp");
+            log.info(user.toString());
         } catch (UserAlreadyExistException | SQLException e) {
             e.printStackTrace();
             log.error(e.getMessage());

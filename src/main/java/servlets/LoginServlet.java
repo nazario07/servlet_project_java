@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         this.userService = new UserServiceImpl(new UserDaoImpl(), new BucketDaoImpl());
     }
 
-    private static final Logger log = Logger.getLogger(String.valueOf(LoginServlet.class));
+    private static final Logger log = Logger.getLogger(LoginServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,9 +43,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("email", user.getEmail());
             session.setAttribute("role", user.getRole());
             resp.sendRedirect("cabinet.jsp");
+            log.info("USER "+user.getFirstName()+" "+ user.getLastName()+ " login");
         } catch (IncorrectCredsExceptions e) {
             e.printStackTrace();
-            log.error(e.getMessage());
+            log.error("Incorrect password or login");
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
     }

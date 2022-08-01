@@ -1,0 +1,32 @@
+2022-07-31 11:57:14 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 12:01:49 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 12:57:48 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 13:02:52 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 13:04:19 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 13:52:07 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 13:57:49 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 14:06:14 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-07-31 15:01:24 INFO  LoginServlet: 46 -USER admin admin login
+
+2022-07-31 15:01:34 ERROR MySqlConnector: 40 -Duplicate entry '17-18' for key 'bucket_product.PRIMARY'
+
+2022-07-31 15:01:34 INFO  BucketController: 51 -user with id 17 add product with id18
+
+2022-07-31 15:01:50 INFO  BucketController: 51 -user with id 17 add product with id18
+
+2022-07-31 15:09:06 INFO  RegistrationServlet: 40 -User(id=0, firstName=Maria, lastName=Tsykhuliak, email=maria@gmail.com, password=1969, role=USER)
+
+2022-07-31 15:11:34 INFO  LoginServlet: 46 -USER Maria Tsykhuliak login
+
+2022-07-31 15:12:57 INFO  BucketController: 51 -user with id 20 add product with id 18
+
+2022-07-31 15:18:20 INFO  BucketController: 51 -user with id 20 add product with id 19
+

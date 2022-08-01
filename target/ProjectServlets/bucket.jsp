@@ -15,6 +15,10 @@
 <div class="list-container container" id="bucket">
 
 </div>
+<div>
+
+</div>
+
 <script src="js/bucket.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>
 

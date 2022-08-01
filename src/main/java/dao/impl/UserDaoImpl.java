@@ -48,4 +48,11 @@ public class UserDaoImpl implements UserDao {
         return Optional.ofNullable(UserMapper.mapToUser(resultSet));
     }
 
+    @Override
+    public void removeUser(int userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM user WHERE id=?");
+        statement.setInt(1, userId);
+        statement.execute();
+    }
+
 }
