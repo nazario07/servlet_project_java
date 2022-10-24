@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
         this.bucketDao = bucketDao;
     }
+
     private static final Logger log = Logger.getLogger(String.valueOf(UserServiceImpl.class));
 
     @Override
@@ -49,11 +50,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public User login(String email, String password) throws IncorrectCredsExceptions {
         try {
             Optional<User> byEmail = userDao.getByEmail(email);
-            if(byEmail.isPresent()){
+            if (byEmail.isPresent()) {
                 User user = byEmail.get();
                 if (user.getPassword().equals(password)) {
                     return user;
@@ -81,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
         userDao.insert(user);
         Optional<User> first = userDao.getByEmail(user.getEmail());
-        first.ifPresent(u-> {
+        first.ifPresent(u -> {
             try {
                 bucketDao.create(u.getId());
             } catch (SQLException e) {

@@ -30,3 +30,11 @@
 
 2022-07-31 15:18:20 INFO  BucketController: 51 -user with id 20 add product with id 19
 
+2022-08-01 16:38:32 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
+2022-08-01 16:38:41 INFO  BucketController: 51 -user with id 16 add product with id 19
+
+2022-08-24 21:08:45 ERROR LoginServlet: 49 -Incorrect password or login
+
+2022-08-24 21:09:14 INFO  LoginServlet: 46 -USER Nazar Tsykhuliak login
+
